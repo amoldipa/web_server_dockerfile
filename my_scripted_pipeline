@@ -1,0 +1,23 @@
+pipeline {
+   agent {label 'jenkins-slave'}
+   
+   stages {
+      stage('Git Checkout') {
+        steps {
+            git branch: 'master',
+                credentialsId: 'https-git-creds',
+                url: 'https://gitlab.com/andromeda99/maven-project.git'
+        }
+      }
+      stage('Build') {
+            steps {
+                sh '/usr/local/src/apache-maven/bin/mvn clean install'
+            }
+      }
+      stage('Deployment') {
+         steps {
+            echo 'Hello World'
+         }
+      }
+   }
+}

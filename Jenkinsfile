@@ -2,14 +2,22 @@ pipeline{
   agent { label 'slave2' }
 
   stages{
-     stage('git checkout'){
+    # stage('git checkout'){
+    #    steps{
+    #          git branch: 'master',
+    #          credentialsId: 'Git-https-cred',
+    #          url: 'https://github.com/amoldipa/web_server_dockerfile.git'
+    #    }
+    # }
+
+     stage( 'Comppiling and Building usuing Maven' ){
         steps{
-              git branch: 'master',
-              credentialsId: 'Git-https-cred',
-              url: 'https://github.com/amoldipa/web_server_dockerfile.git'
-        }
+        sh '/usr/local/src/apache-maven/bin/mvn clean install'
+        }   
+
      }
-     stage( 'Buidling Code'){
+
+     stage( 'Buidling Docker Images'){
         steps{
            sh 'echo "Building  started"'
            sh 'whoami'
@@ -22,7 +30,7 @@ pipeline{
         }
      }
 
-     stage( 'Testing and Deploying'){
+     stage( 'Testing and Deploying using httpd - just copying code'){
         steps{
            sh 'echo "Deployment Started  started"'
            sh 'sudo cp -rf ${WORKSPACE}/index.html /var/www/html/'
@@ -34,7 +42,7 @@ pipeline{
      stage( ' Deploying with Docker container'){
         steps{
            sh 'echo "Deployment with Docker Container"'
-           sh 'sudo cp -rf ${WORKSPACE}/index.html /tmp/myefs/docker_volume'
+           sh 'sudo cp -rf ${WORKSPACE}/webapp/target/webapp /tmp/myefs/docker_volume'
            sh 'docker run -itd --name mywebapp_${BUILD_NUMBER} -v /tmp/myefs/docker_volume:/tmp/ -p 300${BUILD_NUMBER}:80 mywebserver '
            sh 'elinks http://172.31.9.219:300${BUILD_NUMBER}/'
            //sh ' docker images'

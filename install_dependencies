@@ -1,0 +1,38 @@
+Hello 
+
+please install java jdk from here
+
+https://www.tecmint.com/install-java-on-centos-rhel-fedora/  
+
+OpenJDK
+
+# cd /opt
+# wget https://download.java.net/java/GA/jdk13/5b8a42f3905b406298b72d750b6919f6/33/GPL/openjdk-13_linux-x64_bin.tar.gz
+
+# tar -xvf openjdk-13_linux-x64_bin.tar.gz
+# /opt/jdk-13/bin/java -version
+
+# vi /root/.bashrc
+export JAVA_HOME=/opt/jdk-13/
+export PATH=$PATH:/opt/jdk-13/bin
+
+# source /root/.bashrc
+# echo $JAVA_HOME
+# java -version
+
+Please install maven by this link
+
+https://www.tecmint.com/install-apache-maven-on-centos-7/ 
+
+Maven
+# cd /usr/local/src
+# wget http://www-us.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz
+# tar -xf apache-maven-3.5.4-bin.tar.gz
+# mv apache-maven-3.5.4/ apache-maven/
+# vi /root/.bashrc
+export MAVEN_HOME=/usr/local/src/apache-maven
+export PATH=${MAVEN_HOME}/bin:${PATH}
+# source /root/.bashrc 
+# mvn --version
+
+ 

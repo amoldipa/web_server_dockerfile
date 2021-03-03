@@ -1,0 +1,21 @@
+#/bin/bash
+
+echo "Scanning in Progess..."
+
+sleep 5
+
+echo "Scanning completed. Please follow below link."
+
+echo "http://13.58.220.102:8080/"
+
+echo "Awaiting Next Stage"
+
+echo "Testing the code"
+
+sudo scp -i id.rsa -o StrictHostKeyChecking=no -r ${WORKSPACE}/webapp root@www.server.radical.com:/var/www/html
+
+echo "Testing was successful...Uploading the  artifacts to Nexus..."
+
+sudo scp -i id.rsa -o StrictHostKeyChecking=no -r ${WORKSPACE}/webapp/target/webapp.war root@www.server.radical.com:/tmp/artifact_storage
+
+echo "Artifacts uploaded successfully..."

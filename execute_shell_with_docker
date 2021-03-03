@@ -1,0 +1,28 @@
+#/bin/bash
+
+echo "Scanning in Progess..."
+
+sleep 5
+
+echo "Scanning completed. Please follow below link."
+
+echo "Awaiting Next Stage"
+
+echo "Testing the code"
+
+x=$RANDOM
+y=$RANDOM
+
+sudo docker build -t myweb:v1.0 .
+
+sudo docker run -itd --network=my_network --ip=192.168.1.111 --name webserver$x -p $y:80 -v ${WORKSPACE}/webapp/:/var/www/html myweb:v1.0
+
+sudo curl -kv http://18.189.194.91:$y/src/main/webapp/index.jsp
+
+sudo elinks http://18.189.194.91:$y/src/main/webapp/index.jsp
+
+echo "Testing was successful...Uploading the  artifacts to Nexus..."
+
+echo "Uploading artifacts to Nexus"
+
+echo "Artifacts uploaded successfully..."
