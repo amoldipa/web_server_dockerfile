@@ -43,7 +43,7 @@ pipeline{
         steps{
            sh 'echo "Deployment with Docker Container"'
            sh 'sudo cp -rf ${WORKSPACE}/webapp/target/webapp /tmp/myefs/docker_volume'
-           sh 'docker run -itd --name mywebapp_${BUILD_NUMBER} -v /tmp/myefs/docker_volume:/tmp/ -p 300${BUILD_NUMBER}:80 mywebserver '
+           sh 'docker run -itd --name mywebapp_${BUILD_NUMBER} -v /tmp/myefs/docker_volume/:/var/www/html/ -p 300${BUILD_NUMBER}:80 mywebserver '
            sh 'elinks http://172.31.9.219:300${BUILD_NUMBER}/'
            //sh ' docker images'
         }
