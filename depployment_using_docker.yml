@@ -1,0 +1,30 @@
+--- 
+ - name: Deployment with Docker images
+   hosts: slave2
+   tasks:
+    - set_fact:
+        random_number: "{{ 100 | random }}"
+    - name: Install Docker 
+      yum: name=docker state=present
+
+    - name: Start Docker
+      service: name=docker state=started
+    
+    - name:  Copy code from git to docker volume
+      git:
+       repo: https://gist.github.com/b81252f71abf9aad475e89bb5d851a7d.git
+       dest: /tmp/myefs/docker_volume/dockerfile_{{ random_number }}
+       
+    - name: Build images
+      shell: 'docker build -t mywebserver_ansible .'
+      args:
+       chdir: /tmp/myefs/docker_volume/dockerfile_{{ random_number }}/
+
+    - name: List images
+      shell: ' docker images'
+
+    - name: start the docker conatainer with newly build images
+      shell: ' docker run -itd --name mywebcontainer_{{ random_number }} -p 300{{ random_number }}:80 -v /tmp/myefs/docker_volume/:/var/www/html/ mywebserver_ansible '
+      register: con_id
+    
+    - debug: var=con_id 

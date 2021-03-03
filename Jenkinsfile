@@ -48,6 +48,18 @@ pipeline{
            //sh ' docker images'
         }
      }
+    
+    stage( ' Deployment using Ansible' ){
+       steps{
+       sh 'echo "Deployment using Ansible playbook"'
+       sh 'ansible-playbook depployment_using_docker.yml -i inventory.txt'
+  
+       }
+
+
+
+
+    }
 
   }
 
