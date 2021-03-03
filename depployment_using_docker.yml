@@ -1,6 +1,6 @@
 --- 
  - name: Deployment with Docker images
-   hosts: slave2
+   hosts: slave1
    tasks:
     - set_fact:
         random_number: "{{ 100 | random }}"
