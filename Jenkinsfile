@@ -2,13 +2,13 @@ pipeline{
   agent { label 'slave2' }
 
   stages{
-    # stage('git checkout'){
-    #    steps{
-    #          git branch: 'master',
-    #          credentialsId: 'Git-https-cred',
-    #          url: 'https://github.com/amoldipa/web_server_dockerfile.git'
-    #    }
-    # }
+  //# stage('git checkout'){
+   // #    steps{
+    //#          git branch: 'master',
+    //#          credentialsId: 'Git-https-cred',
+    //#          url: 'https://github.com/amoldipa/web_server_dockerfile.git'
+    //#    }
+   // # }
 
      stage( 'Comppiling and Building usuing Maven' ){
         steps{
