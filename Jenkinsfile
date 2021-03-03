@@ -14,6 +14,7 @@ pipeline{
            sh 'echo "Building  started"'
            sh 'whoami'
            sh 'echo ${PWD}'
+           sh 'ls -l'
            sh ' docker build -t mywebserver .'
            sh ' echo "Building done"'
            sh 'sudo yum install elinks -y'
