@@ -34,7 +34,7 @@ pipeline{
         steps{
            sh 'echo "Deployment Started  started"'
            sh 'sudo cp -rf ${WORKSPACE}/index.html /var/www/html/'
-           sh 'elinks http://172.31.9.219/'
+           sh ' echo "elinks http://172.31.9.219/"'
            //sh ' docker images'
         }
      }
