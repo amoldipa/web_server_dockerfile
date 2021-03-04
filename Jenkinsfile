@@ -23,10 +23,10 @@ pipeline{
            sh 'whoami'
            sh 'echo ${PWD}'
            sh 'ls -l'
-           sh ' docker build -t mywebserver .'
+           sh ' sudo docker build -t mywebserver .'
            sh ' echo "Building done"'
            sh 'sudo yum install elinks -y'
-           sh ' docker images'
+           sh 'sudo  docker images'
         }
      }
 
@@ -43,7 +43,7 @@ pipeline{
         steps{
            sh 'echo "Deployment with Docker Container"'
            sh 'sudo cp -rf ${WORKSPACE}/webapp/target/webapp /tmp/myefs/docker_volume'
-           sh 'docker run -itd --name mywebapp_${BUILD_NUMBER} -v /tmp/myefs/docker_volume/:/var/www/html/ -p 300${BUILD_NUMBER}:80 mywebserver '
+           sh 'sudo docker run -itd --name mywebapp_${BUILD_NUMBER} -v /tmp/myefs/docker_volume/:/var/www/html/ -p 300${BUILD_NUMBER}:80 mywebserver '
            sh 'echo "elinks http://3.142.55.109:300${BUILD_NUMBER}/webapp/index_dev.jsp"'
            //sh ' docker images'
         }
