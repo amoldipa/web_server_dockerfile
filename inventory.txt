@@ -1,4 +1,4 @@
 slave2 ansible_host=172.31.9.219 ansible_connection=ssh
 slave1 ansible_host=172.31.36.142 ansible_connection=ssh
 workernode1 ansible_host=172.31.21.107 ansible_connection=ssh
-worker ansible_host=172.31.44.132 ansible_connection=ssh
+worker ansible_host=172.31.44.132 ansible_connection=ssh ansible_user=jenkins
